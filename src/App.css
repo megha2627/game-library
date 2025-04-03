@@ -1,38 +1,146 @@
-.App {
-  text-align: center;
+/* src/App.css */
+.header-custom {
+  background: linear-gradient(90deg, #87CEEB, #B0E0E6); /* Light blue gradient */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 1rem 2rem;
+  width: 100vw; /* Full viewport width */
+  margin: 0;
+  position: relative;
+  left: 0;
+  right: 0;
+  overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.text-neon {
+  color: #008080 !important;
+  text-shadow: 0 0 5px rgba(0, 128, 128, 0.5);
+  font-weight: 700;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.search-form {
+  max-width: 400px;
+  flex-grow: 1; /* Allow search to take available space */
+  margin: 0 1rem; /* Ensure it doesn’t touch edges */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.search-input {
+  background-color: #2a2a60 !important;
+  border: 2px solid #00ff99;
+  color: #ffffff;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #00cc80;
+  box-shadow: 0 0 5px rgba(0, 255, 153, 0.5);
+}
+
+.search-input::placeholder {
+  color: #b0b0b0;
+}
+
+.btn-neon {
+  background-color: #00ff99;
+  color: #1a1a40;
+  border: none;
+  font-size: 1.1rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  white-space: nowrap; /* Prevent button text wrapping */
+}
+
+.btn-neon:hover {
+  background-color: #00cc80;
+  color: #1a1a40;
+  transform: translateY(-2px);
+}
+
+.auth-buttons {
+  flex-shrink: 0; /* Prevent buttons from shrinking */
+}
+.main-content {
+  padding-top: 1rem; /* Add space below full-width header */
+}
+/* src/App.css (game card section) */
+.game-card {
+  background: #1a1a40;
+  border: 1px solid #00ff99;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 300px; /* Fixed width */
+  height: 400px; /* Fixed height */
+  margin: 0 auto; /* Center within column */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  overflow: hidden; /* Prevent content overflow */
 }
 
-.App-link {
-  color: #61dafb;
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 255, 153, 0.3);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.game-img {
+  border-radius: 8px 8px 0 0;
+  height: 200px; /* Fixed image height */
+  width: 100%;
+  object-fit: cover; /* Maintain aspect ratio */
+}
+
+.game-card .card-body {
+  flex: 1; /* Take remaining space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  overflow: hidden; /* Prevent text overflow */
+}
+
+.game-card .card-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  white-space: nowrap; /* Prevent wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Truncate with ellipsis */
+}
+
+.game-card .card-text {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Ensure buttons stay at the bottom */
+.game-card .btn-neon,
+.game-card .btn-danger {
+  font-size: 1rem; /* Slightly smaller to fit */
+  padding: 0.4rem 1rem;
+}
+
+.game-detail {
+  background: #121212;
+}
+
+.hero-img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #00ff99;
+}
+
+.screenshot-img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #00ff99;
+  transition: transform 0.3s ease;
+}
+
+.screenshot-img:hover {
+  transform: scale(1.05);
 }
