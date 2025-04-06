@@ -31,28 +31,47 @@ function App() {
       <div className="d-flex flex-column min-vh-100">
         <Header onSearch={handleSearch} />
         <Container fluid className="main-content">
-          <Row>
-            <Col md={3}>
-              <Sidebar onFilterChange={handleFilterChange} />
-            </Col>
-            <Col md={9}>
-              <Routes>
-                <Route
-                  path="/"
-                  element={
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Row>
+                  <Col md={3}>
+                    <Sidebar onFilterChange={handleFilterChange} />
+                  </Col>
+                  <Col md={9}>
                     <GameGrid filters={filters} searchQuery={searchQuery} />
-                  }
-                />
-                <Route path="/game/:id" element={<GameDetail />} />
-                <Route
-                  path="/bookmarks"
-                  element={
-                    <Bookmarks filters={filters} searchQuery={searchQuery} />
-                  }
-                />
-              </Routes>
-            </Col>
-          </Row>
+                  </Col>
+                </Row>
+              }
+            />
+            <Route
+              path="/game/:id"
+              element={
+                <Row>
+                  <Col md={3}>
+                    <Sidebar onFilterChange={handleFilterChange} />
+                  </Col>
+                  <Col md={9}>
+                    <GameDetail />
+                  </Col>
+                </Row>
+              }
+            />
+            <Route
+              path="/bookmarks"
+              element={
+                <Row>
+                  <Col md={12}>
+                    {" "}
+                    {/* Full width, no sidebar */}
+                    <Bookmarks searchQuery={searchQuery} />{" "}
+                    {/* Removed filters prop */}
+                  </Col>
+                </Row>
+              }
+            />
+          </Routes>
         </Container>
         <Footer />
       </div>

@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import { removeBookmark } from "../store/bookmarkSlice";
 import { useUser } from "@clerk/clerk-react";
 
-function Bookmarks({ filters, searchQuery }) {
+function Bookmarks({ searchQuery }) {
+  // Removed filters prop
   const { isSignedIn } = useUser();
   const bookmarks = useSelector((state) => state.bookmarks.games);
   const dispatch = useDispatch();
@@ -18,45 +19,22 @@ function Bookmarks({ filters, searchQuery }) {
     );
   }
 
-  // Filter bookmarks
-  const filteredBookmarks = bookmarks.filter((game) => {
-    // Search filter
-    const matchesSearch = searchQuery
-      ? game.name.toLowerCase().includes(searchQuery.toLowerCase())
-      : true;
-
-    // Genre filter
-    const matchesGenre = filters.genres
-      ? game.genres &&
-        Array.isArray(game.genres) &&
-        game.genres.some((genre) => genre.slug === filters.genres)
-      : true;
-
-    // Year filter
-    const matchesYear = filters.year
-      ? game.released &&
-        typeof game.released === "string" &&
-        game.released.split("-")[0] === filters.year.toString()
-      : true;
-
-    return matchesSearch && matchesGenre && matchesYear;
-  });
-
-  // Sort by rating
-  const sortedBookmarks =
-    filters.ordering === "popularity"
-      ? [...filteredBookmarks].sort(
-          (a, b) => Number(b.rating || 0) - Number(a.rating || 0)
-        )
-      : filteredBookmarks;
+  // Filter bookmarks by search query only
+  const filteredBookmarks = searchQuery
+    ? bookmarks.filter((game) =>
+        game.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : bookmarks;
 
   return (
     <div className="p-4">
       <Row className="justify-content-center">
-        {sortedBookmarks.length === 0 ? (
-          <p className="text-center">No games match your filters or search.</p>
+        {filteredBookmarks.length === 0 ? (
+          <p className="text-center">
+            No games match your search or your library is empty.
+          </p>
         ) : (
-          sortedBookmarks.map((game) => (
+          filteredBookmarks.map((game) => (
             <Col md={4} key={game.id} className="mb-4">
               <Card className="game-card">
                 <Card.Img
