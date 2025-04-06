@@ -20,15 +20,19 @@ function GameGrid({ filters, searchQuery }) {
           genres: filters.genres || undefined,
           dates:
             filters.year && !isNaN(filters.year)
-              ? `${filters.year.toString()}-01-01,${filters.year.toString()}-12-31`
+              ? `${filters.year}-01-01,${filters.year}-12-31`
               : undefined,
           ordering: filters.ordering === "popularity" ? "-rating" : undefined,
         };
+        console.log("Filters received:", filters); // Debug: Check filters
+        console.log("API Params:", params); // Debug: Check params
         const data = await fetchGames(params);
+        console.log("API Response:", data); // Debug: Check response
         setGames(data.results || []);
         setTotalPages(Math.ceil(data.count / 12) || 1);
         setError(null);
       } catch (error) {
+        console.error("Error fetching games:", error);
         setGames([]);
         setError("Unable to load games.");
       }
